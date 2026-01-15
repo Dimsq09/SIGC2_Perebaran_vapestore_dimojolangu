@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Persebaran Vapestore - Mojolangu</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        /* --- 1. MODERN VARIABLES --- */
+        :root {
+            --primary: #059669;       /* Emerald Green */
+            --primary-dark: #047857;
+            --accent: #10b981;
+            --bg-body: #f8fafc;       
+            --text-main: #0f172a;     
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --card-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; }
+        
+        /* --- 2. NAVBAR --- */
+        .navbar-container {
+            position: fixed;
+            top: 20px;
+            left: 0; 
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 12px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .btn-nav {
+            background: var(--text-main);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-nav:hover { background: var(--primary); transform: translateY(-2px); }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 60px 5%;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-text { flex: 1; }
+
+        .label-pill {
+            display: inline-block;
+            background: #d1fae5;
+            color: var(--primary-dark);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 90%;
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+        }
+
+        .image-card {
+            width: 100%;
+            height: 500px;
+            background-color: #e2e8f0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--card-shadow);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        
+        /* Floating Badge Decoration */
+        .float-stat {
+            position: absolute;
+            background: white;
+            padding: 15px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            bottom: 40px;
+            left: -30px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
+
+        /* --- 4. ZIG-ZAG FEATURES --- */
+        .features-section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 120px;
+        }
+
+        .feature-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-content { flex: 1; }
+        .feature-visual { flex: 1; }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #ecfdf5;
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+        }
+
+        .feature-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .visual-box {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+        }
+
+        /* --- 5. IMMERSIVE MAP PREVIEW --- */
+        .map-section {
+            background: var(--text-main);
+            color: white;
+            padding: 100px 5%;
+            border-radius: 40px 40px 0 0;
+            text-align: center;
+        }
+
+        .map-frame {
+            margin-top: 50px;
+            background: #334155;
+            padding: 10px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .map-frame img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 40px;
+            transition: 0.3s;
+        }
+        .btn-large:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- 6. AUTHOR & FOOTER --- */
+        .footer-content {
+            background: var(--text-main);
+            color: #94a3b8;
+            padding: 0 5% 60px 5%;
+            text-align: center;
+        }
+        
+        .author-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 25px 10px 10px;
+            border-radius: 50px;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .author-badge img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .hero { flex-direction: column; padding-top: 150px; text-align: center; }
+            .hero-visual { width: 100%; }
+            .float-stat { display: none; }
+            .feature-row, .feature-row.reverse { flex-direction: column; gap: 40px; text-align: center; }
+            .feature-icon { margin: 0 auto 20px; }
+            .navbar-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <i class='bx bxs-map-alt'></i> GeoMojolangu
+            </div>
+            <div class="nav-links">
+                <a href="#features">Fitur</a>
+                <a href="#map-preview">Preview</a>
+                <a href="#developer">Developer</a>
+            </div>
+            <a href="Vapestore/Vapestore.html" class="btn-nav">Buka Peta</a>
+        </nav>
+    </div>
+
+    <section class="hero">
+        <div class="hero-text">
+            <span class="label-pill">🌍 WebGIS Project 2026</span>
+            <h1>Peta Persebaran Vapestore di Mojolangu</h1>
+            <p>Platform Sistem Informasi Geografis untuk menemukan lokasi, jam operasional, dan detail usaha Vapestore yang tersebar di wilayah Kelurahan Mojolangu.</p>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <a href="Vapestore/Vapestore.html" class="btn-nav" style="background: var(--primary); padding: 15px 35px; font-size: 1rem;">
+                    Lihat Peta
+                </a>
+                <a href="#features" class="btn-nav" style="background: white; color: var(--text-main); border: 1px solid #e2e8f0; padding: 15px 35px; font-size: 1rem;">
+                    Pelajari Fitur
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="image-card">
+                <img src="assets/Mojolangu.png" alt="Peta Mojolangu">
+            </div>
+            
+            <div class="float-stat">
+                <div style="background: #e0f2fe; padding: 10px; border-radius: 10px; color: #0284c7;">
+                    <i class='bx bxs-store' style="font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                    <h4 style="margin: 0; font-size: 0.9rem;">Vapestore Terdata</h4>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Data Terverifikasi</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        
+        <div class="feature-row">
+            <div class="feature-content reveal-left">
+                <div class="feature-icon"><i class='bx bx-current-location'></i></div>
+                <h2>Akurasi Lokasi Usaha</h2>
+                <p>Temukan Vapestore terdekat dengan presisi tinggi. Kami menggunakan koordinat lokasi yang telah divalidasi langsung di lapangan untuk memastikan Anda sampai ke tujuan tanpa tersesat.</p>
+                <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.9rem;">
+                    <span><i class='bx bx-check' style="color: var(--primary)"></i> Koordinat Tepat</span>
+                    <span><i class='bx bx-check' style="color: var(--primary)"></i> Update Lokasi</span>
+                </div>
+            </div>
+            <div class="feature-visual reveal-right">
+                <div class="visual-box">
+                    <div style="background: #f1f5f9; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                        <i class='bx bx-map-pin' style="font-size: 4rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-row reverse">
+            <div class="feature-content reveal-right">
+                <div class="feature-icon"><i class='bx bx-store-alt'></i></div>
+                <h2>Analisis Persebaran Bisnis</h2>
+                <p>Sistem ini memberikan visualisasi persebaran titik lokasi usaha di Mojolangu. Membantu pengguna melihat kepadatan toko dan opsi yang tersedia di setiap area.</p>
+            </div>
+            <div class="feature-visual reveal-left">
+                <div class="visual-box">
+                    <div style="background: #f1f5f9; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                        <i class='bx bxs-shopping-bags' style="font-size: 4rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="map-preview" class="map-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Tampilan Peta Interaktif</h2>
+        <p style="color: #94a3b8; margin-bottom: 40px;">Eksplorasi lokasi vapestore dengan tampilan peta modern.</p>
+        
+        <div class="map-frame reveal-up">
+            <img src="assets/Mojolangu.png" alt="Preview Layout Peta Vapestore">
+        </div>
+
+        <br>
+        <a href="Vapestore/Vapestore.html" class="btn-large">
+            Jelajahi Peta Sekarang <i class='bx bx-right-arrow-alt'></i>
+        </a>
+    </section>
+
+    <footer id="developer" class="footer-content">
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); width: 100%; margin-bottom: 50px;"></div>
+        
+        <div class="author-badge">
+            <img src="image_6a8614.png" alt="Foto Profil">
+            <div>
+                <h4 style="color: white; margin: 0;">Dhimaz Satrya Putra Stillana</h4>
+                <span style="font-size: 0.85rem; color: #94a3b8;">NIM: 23201210 • Institut Asia Malang</span>
+            </div>
+        </div>
+        
+        <p style="font-size: 0.9rem;">&copy; 2026 GeoMojolangu Project. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var revealTop = reveals[i].getBoundingClientRect().top;
+                var revealPoint = 100;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    reveals[i].style.opacity = '1';
+                    reveals[i].style.transform = 'translate(0, 0)';
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const elements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transition = 'all 0.8s ease-out';
+                
+                if(el.classList.contains('reveal-left')) el.style.transform = 'translateX(-50px)';
+                if(el.classList.contains('reveal-right')) el.style.transform = 'translateX(50px)';
+                if(el.classList.contains('reveal-up')) el.style.transform = 'translateY(50px)';
+            });
+            reveal(); 
+        });
+    </script>
+</body>
+</html>
