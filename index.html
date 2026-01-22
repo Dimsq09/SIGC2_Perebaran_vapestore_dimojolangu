@@ -9,16 +9,18 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-        /* --- 1. MODERN VARIABLES --- */
+        /* --- 1. VAPESTORE THEME VARIABLES (Dark & Neon) --- */
         :root {
-            --primary: #059669;       /* Emerald Green */
-            --primary-dark: #047857;
-            --accent: #10b981;
-            --bg-body: #f8fafc;       
-            --text-main: #0f172a;     
-            --text-muted: #64748b;
-            --white: #ffffff;
-            --card-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
+            --bg-body: #050505;       /* Hitam Pekat */
+            --bg-nav: rgba(20, 20, 20, 0.8);
+            --primary: #8b5cf6;       /* Neon Purple */
+            --primary-dark: #6d28d9;
+            --accent: #06b6d4;        /* Neon Cyan */
+            --text-main: #ffffff;     
+            --text-muted: #9ca3af;
+            --card-bg: rgba(255, 255, 255, 0.03); /* Glassmorphism Dark */
+            --card-border: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(139, 92, 246, 0.5);
             --radius-lg: 24px;
             --radius-md: 16px;
         }
@@ -30,11 +32,40 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             overflow-x: hidden;
+            position: relative;
         }
 
         a { text-decoration: none; }
+
+        /* --- BACKGROUND PARTICLES --- */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            opacity: 0;
+            animation: floatUp linear infinite;
+            bottom: -20px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
         
-        /* --- 2. NAVBAR --- */
+        /* --- 2. NAVBAR (Glass Effect) --- */
         .navbar-container {
             position: fixed;
             top: 20px;
@@ -46,15 +77,15 @@
         }
 
         .navbar {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
+            background: var(--bg-nav);
+            backdrop-filter: blur(15px);
             padding: 12px 30px;
             border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             gap: 30px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid var(--card-border);
         }
 
         .nav-logo {
@@ -64,6 +95,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            text-shadow: 0 0 10px var(--primary);
         }
 
         .nav-links a {
@@ -73,18 +105,25 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover { 
+            color: var(--accent); 
+            text-shadow: 0 0 8px var(--accent);
+        }
 
         .btn-nav {
-            background: var(--text-main);
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
             color: var(--white);
-            padding: 8px 20px;
+            padding: 8px 25px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             transition: 0.3s;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
         }
-        .btn-nav:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn-nav:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+        }
 
         /* --- 3. HERO SECTION --- */
         .hero {
@@ -97,17 +136,19 @@
             margin: 0 auto;
         }
 
-        .hero-text { flex: 1; }
+        .hero-text { flex: 1; z-index: 2; }
 
         .label-pill {
             display: inline-block;
-            background: #d1fae5;
-            color: var(--primary-dark);
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent);
             padding: 6px 16px;
             border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 24px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);
         }
 
         .hero h1 {
@@ -115,6 +156,9 @@
             line-height: 1.1;
             margin-bottom: 24px;
             letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
@@ -128,16 +172,18 @@
         .hero-visual {
             flex: 1;
             position: relative;
+            z-index: 2;
         }
 
         .image-card {
             width: 100%;
             height: 500px;
-            background-color: #e2e8f0;
+            background-color: #1a1a1a;
             border-radius: var(--radius-lg);
             overflow: hidden;
             position: relative;
-            box-shadow: var(--card-shadow);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
         }
 
         .image-card img {
@@ -145,30 +191,34 @@
             height: 100%;
             object-fit: cover;
             transition: 0.5s;
+            opacity: 0.8;
         }
         
-        /* Floating Badge Decoration */
         .float-stat {
             position: absolute;
-            background: white;
+            background: rgba(30, 30, 30, 0.9);
             padding: 15px 20px;
             border-radius: var(--radius-md);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             gap: 15px;
             bottom: 40px;
             left: -30px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
             animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
 
-        /* --- 4. ZIG-ZAG FEATURES --- */
+        /* --- 4. FEATURES (Dark Cards) --- */
         .features-section {
             padding: 100px 5%;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .feature-row {
@@ -188,7 +238,7 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: #ecfdf5;
+            background: rgba(139, 92, 246, 0.1);
             color: var(--primary);
             border-radius: 16px;
             display: flex;
@@ -196,11 +246,14 @@
             justify-content: center;
             font-size: 1.8rem;
             margin-bottom: 24px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
         .feature-content h2 {
             font-size: 2.2rem;
             margin-bottom: 20px;
+            color: white;
         }
 
         .feature-content p {
@@ -210,60 +263,84 @@
         }
 
         .visual-box {
-            background: white;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: var(--radius-lg);
-            box-shadow: var(--card-shadow);
-            border: 1px solid #f1f5f9;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(5px);
         }
 
-        /* --- 5. IMMERSIVE MAP PREVIEW --- */
+        .icon-placeholder {
+            background: #111; 
+            height: 200px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--text-muted);
+            border: 1px dashed var(--card-border);
+        }
+
+        /* --- 5. MAP PREVIEW --- */
         .map-section {
-            background: var(--text-main);
+            background: #0f0f0f;
             color: white;
             padding: 100px 5%;
             border-radius: 40px 40px 0 0;
             text-align: center;
+            border-top: 1px solid var(--card-border);
+            position: relative;
+            z-index: 2;
         }
 
         .map-frame {
             margin-top: 50px;
-            background: #334155;
+            background: #1a1a1a;
             padding: 10px;
             border-radius: 20px;
             display: inline-block;
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
+            box-shadow: 0 0 50px rgba(6, 182, 212, 0.15); /* Cyan Glow */
             max-width: 900px;
             width: 100%;
+            border: 1px solid var(--card-border);
         }
 
         .map-frame img {
             width: 100%;
             border-radius: 12px;
             display: block;
+            filter: contrast(1.1) brightness(0.9);
         }
 
         .btn-large {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--primary);
-            color: white;
+            background: linear-gradient(90deg, var(--accent), #3b82f6);
+            color: #000;
             padding: 18px 40px;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 700;
             margin-top: 40px;
             transition: 0.3s;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         }
-        .btn-large:hover { background: var(--accent); transform: scale(1.05); }
+        .btn-large:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.8);
+            color: white;
+        }
 
-        /* --- 6. AUTHOR & FOOTER --- */
+        /* --- 6. FOOTER --- */
         .footer-content {
-            background: var(--text-main);
-            color: #94a3b8;
+            background: #0f0f0f;
+            color: var(--text-muted);
             padding: 0 5% 60px 5%;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
         
         .author-badge {
@@ -273,7 +350,7 @@
             padding: 10px 25px 10px 10px;
             border-radius: 50px;
             gap: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--card-border);
             margin-bottom: 30px;
             text-align: left;
         }
@@ -283,6 +360,7 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid var(--primary);
         }
 
         /* --- RESPONSIVE --- */
@@ -292,16 +370,18 @@
             .float-stat { display: none; }
             .feature-row, .feature-row.reverse { flex-direction: column; gap: 40px; text-align: center; }
             .feature-icon { margin: 0 auto 20px; }
-            .navbar-container { display: none; }
+            .navbar-container { display: none; } 
         }
     </style>
 </head>
 <body>
 
+    <div id="particles-container"></div>
+
     <div class="navbar-container">
         <nav class="navbar">
             <div class="nav-logo">
-                <i class='bx bxs-map-alt'></i> GeoMojolangu
+                <i class='bx bxs-cloud' style="color: var(--accent); font-size: 1.5rem;"></i> GeoVape
             </div>
             <div class="nav-links">
                 <a href="#features">Fitur</a>
@@ -314,15 +394,15 @@
 
     <section class="hero">
         <div class="hero-text">
-            <span class="label-pill">🌍 WebGIS Project 2026</span>
+            <span class="label-pill">💨 WebGIS Vapestore 2026</span>
             <h1>Peta Persebaran Vapestore di Mojolangu</h1>
-            <p>Platform Sistem Informasi Geografis untuk menemukan lokasi, jam operasional, dan detail usaha Vapestore yang tersebar di wilayah Kelurahan Mojolangu.</p>
+            <p>Temukan lokasi Vapestore terdekat, stok liquid, device terbaru, dan jam operasional di wilayah Kelurahan Mojolangu dengan data akurat.</p>
             
             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                <a href="Vapestore/Vapestore.html" class="btn-nav" style="background: var(--primary); padding: 15px 35px; font-size: 1rem;">
+                <a href="Vapestore/Vapestore.html" class="btn-nav">
                     Lihat Peta
                 </a>
-                <a href="#features" class="btn-nav" style="background: white; color: var(--text-main); border: 1px solid #e2e8f0; padding: 15px 35px; font-size: 1rem;">
+                <a href="#features" class="btn-nav" style="background: transparent; border: 1px solid var(--text-muted); box-shadow: none;">
                     Pelajari Fitur
                 </a>
             </div>
@@ -334,12 +414,12 @@
             </div>
             
             <div class="float-stat">
-                <div style="background: #e0f2fe; padding: 10px; border-radius: 10px; color: #0284c7;">
+                <div style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 10px; color: var(--primary);">
                     <i class='bx bxs-store' style="font-size: 1.5rem;"></i>
                 </div>
                 <div>
-                    <h4 style="margin: 0; font-size: 0.9rem;">Vapestore Terdata</h4>
-                    <span style="font-size: 0.8rem; color: var(--text-muted);">Data Terverifikasi</span>
+                    <h4 style="margin: 0; font-size: 0.9rem; color: white;">Vapestore Aktif</h4>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Data Verified</span>
                 </div>
             </div>
         </div>
@@ -349,18 +429,18 @@
         
         <div class="feature-row">
             <div class="feature-content reveal-left">
-                <div class="feature-icon"><i class='bx bx-current-location'></i></div>
-                <h2>Akurasi Lokasi Usaha</h2>
-                <p>Temukan Vapestore terdekat dengan presisi tinggi. Kami menggunakan koordinat lokasi yang telah divalidasi langsung di lapangan untuk memastikan Anda sampai ke tujuan tanpa tersesat.</p>
-                <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.9rem;">
-                    <span><i class='bx bx-check' style="color: var(--primary)"></i> Koordinat Tepat</span>
-                    <span><i class='bx bx-check' style="color: var(--primary)"></i> Update Lokasi</span>
+                <div class="feature-icon"><i class='bx bx-map-pin'></i></div>
+                <h2>Akurasi Lokasi Presisi</h2>
+                <p>Tidak perlu bingung mencari jalan. Data koordinat store telah divalidasi langsung di lapangan untuk memastikan Anda sampai ke tujuan vapestore tanpa tersesat.</p>
+                <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.9rem; color: var(--text-main);">
+                    <span><i class='bx bx-check' style="color: var(--accent)"></i> Titik Koordinat</span>
+                    <span><i class='bx bx-check' style="color: var(--accent)"></i> Rute Tercepat</span>
                 </div>
             </div>
             <div class="feature-visual reveal-right">
                 <div class="visual-box">
-                    <div style="background: #f1f5f9; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
-                        <i class='bx bx-map-pin' style="font-size: 4rem;"></i>
+                    <div class="icon-placeholder">
+                        <i class='bx bx-navigation' style="font-size: 4rem; color: var(--text-muted);"></i>
                     </div>
                 </div>
             </div>
@@ -368,14 +448,14 @@
 
         <div class="feature-row reverse">
             <div class="feature-content reveal-right">
-                <div class="feature-icon"><i class='bx bx-store-alt'></i></div>
-                <h2>Analisis Persebaran Bisnis</h2>
-                <p>Sistem ini memberikan visualisasi persebaran titik lokasi usaha di Mojolangu. Membantu pengguna melihat kepadatan toko dan opsi yang tersedia di setiap area.</p>
+                <div class="feature-icon"><i class='bx bxs-data'></i></div>
+                <h2>Analisis Pasar Vape</h2>
+                <p>Visualisasi persebaran toko membantu melihat kepadatan bisnis vapestore di area Mojolangu. Cocok untuk vapers mencari opsi terdekat atau owner melihat kompetitor.</p>
             </div>
             <div class="feature-visual reveal-left">
                 <div class="visual-box">
-                    <div style="background: #f1f5f9; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
-                        <i class='bx bxs-shopping-bags' style="font-size: 4rem;"></i>
+                    <div class="icon-placeholder">
+                        <i class='bx bxs-pie-chart-alt-2' style="font-size: 4rem; color: var(--text-muted);"></i>
                     </div>
                 </div>
             </div>
@@ -384,8 +464,8 @@
     </section>
 
     <section id="map-preview" class="map-section">
-        <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Tampilan Peta Interaktif</h2>
-        <p style="color: #94a3b8; margin-bottom: 40px;">Eksplorasi lokasi vapestore dengan tampilan peta modern.</p>
+        <h2 style="font-size: 2.5rem; margin-bottom: 15px; text-shadow: 0 0 20px rgba(255,255,255,0.2);">Tampilan Peta Modern</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">Layout intuitif dengan tema gelap yang nyaman di mata.</p>
         
         <div class="map-frame reveal-up">
             <img src="assets/Mojolangu.png" alt="Preview Layout Peta Vapestore">
@@ -393,18 +473,18 @@
 
         <br>
         <a href="Vapestore/Vapestore.html" class="btn-large">
-            Jelajahi Peta Sekarang <i class='bx bx-right-arrow-alt'></i>
+            Jelajahi Sekarang <i class='bx bx-rocket'></i>
         </a>
     </section>
 
     <footer id="developer" class="footer-content">
-        <div style="border-top: 1px solid rgba(255,255,255,0.1); width: 100%; margin-bottom: 50px;"></div>
+        <div style="border-top: 1px solid var(--card-border); width: 100%; margin-bottom: 50px;"></div>
         
         <div class="author-badge">
             <img src="image_6a8614.png" alt="Foto Profil">
             <div>
                 <h4 style="color: white; margin: 0;">Dhimaz Satrya Putra Stillana</h4>
-                <span style="font-size: 0.85rem; color: #94a3b8;">NIM: 23201210 • Institut Asia Malang</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">NIM: 23201210 • Institut Asia Malang</span>
             </div>
         </div>
         
@@ -412,6 +492,37 @@
     </footer>
 
     <script>
+        // 1. Script Membuat Partikel Mengambang Berwarna-warni
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 40; // Jumlah partikel
+            const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#ffffff']; // Warna: Ungu, Cyan, Pink, Putih
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize properties
+                const size = Math.random() * 5 + 2 + 'px';
+                const posX = Math.random() * 100 + '%';
+                const delay = Math.random() * 5 + 's';
+                const duration = Math.random() * 10 + 10 + 's'; // 10-20 detik
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                // Apply styles
+                particle.style.width = size;
+                particle.style.height = size;
+                particle.style.left = posX;
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 10px ${color}`; // Efek glow
+                particle.style.animationDelay = delay;
+                particle.style.animationDuration = duration;
+
+                container.appendChild(particle);
+            }
+        });
+
+        // 2. Script Scroll Reveal (Animasi saat scroll ke bawah)
         window.addEventListener('scroll', reveal);
 
         function reveal() {
@@ -429,18 +540,17 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const elements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
-            elements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transition = 'all 0.8s ease-out';
-                
-                if(el.classList.contains('reveal-left')) el.style.transform = 'translateX(-50px)';
-                if(el.classList.contains('reveal-right')) el.style.transform = 'translateX(50px)';
-                if(el.classList.contains('reveal-up')) el.style.transform = 'translateY(50px)';
-            });
-            reveal(); 
+        // Init styles for reveal animation
+        const elements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+        elements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transition = 'all 0.8s ease-out';
+            
+            if(el.classList.contains('reveal-left')) el.style.transform = 'translateX(-50px)';
+            if(el.classList.contains('reveal-right')) el.style.transform = 'translateX(50px)';
+            if(el.classList.contains('reveal-up')) el.style.transform = 'translateY(50px)';
         });
+        reveal(); // Trigger once on load
     </script>
 </body>
 </html>
